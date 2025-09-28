@@ -9,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST
     $book_id = $conn->real_escape_string($_POST['book_id'] ?? '');
 
     if (empty($id) || empty($return_date) || empty($book_id)) {
-        $message = "<p style='color:red;'>❌ Error: Missing record ID, book ID, or return date.</p>";
+        $message = "<p style='color:red;'> Error: Missing record ID, book ID, or return date.</p>";
     } elseif (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $return_date)) {
-        $message = "<p style='color:red;'>❌ Error: Invalid date format. Please use YYYY-MM-DD.</p>";
+        $message = "<p style='color:red;'> Error: Invalid date format. Please use YYYY-MM-DD.</p>";
     } else {
         $conn->begin_transaction(); 
         try {
@@ -26,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST
             }
             
             $conn->commit();
-            $message = "<p style='color:green;'>✅ Book return successfully recorded on **{$return_date}**!</p>";
+            $message = "<p style='color:green;'> Book return successfully recorded on **{$return_date}**!</p>";
 
         } catch (Exception $e) {
             $conn->rollback();
-            $message = "<p style='color:red;'>❌ Transaction Failed: " . $e->getMessage() . "</p>";
+            $message = "<p style='color:red;'> Transaction Failed: " . $e->getMessage() . "</p>";
         }
     }
 }
