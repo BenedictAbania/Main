@@ -1,22 +1,18 @@
 <?php
 include "database.php"; 
 $message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST['form_type'] === 'return_book') {
-    
     $id = $conn->real_escape_string($_POST['record_id'] ?? ''); 
     $return_date = $conn->real_escape_string($_POST['return_date'] ?? '');
     $book_id = $conn->real_escape_string($_POST['book_id'] ?? '');
-
     if (empty($id) || empty($return_date) || empty($book_id)) {
-        $message = "<p style='color:red;'>❌ Error: Missing record ID, book ID, or return date.</p>";
+        $message = "<p style='color:red;'> Error: Missing record ID, book ID, or return date.</p>";
     } elseif (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $return_date)) {
-        $message = "<p style='color:red;'>❌ Error: Invalid date format. Please use YYYY-MM-DD.</p>";
+        $message = "<p style='color:red;'> Error: Invalid date format. Please use YYYY-MM-DD.</p>";
     } else {
         $conn->begin_transaction(); 
         try {
             $update_borrow_sql = "UPDATE borrowing_records SET return_date = '{$return_date}' WHERE id = '{$id}' AND return_date IS NULL";
-            
             if ($conn->query($update_borrow_sql) === FALSE) {
                 throw new Exception("Error updating borrowing record: " . $conn->error);
             }
@@ -26,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['form_type']) && $_POST
             }
             
             $conn->commit();
-            $message = "<p style='color:green;'>✅ Book return successfully recorded on **{$return_date}**!</p>";
+            $message = "<p style='color:green;'> Book return successfully recorded on **{$return_date}**!</p>";
 
         } catch (Exception $e) {
             $conn->rollback();
-            $message = "<p style='color:red;'>❌ Transaction Failed: " . $e->getMessage() . "</p>";
+            $message = "<p style='color:red;'> Transaction Failed: " . $e->getMessage() . "</p>";
         }
     }
 }
@@ -59,14 +55,12 @@ $active_records_result = $conn->query($active_records_query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Book</title>
     <link rel="stylesheet" href="assets/functions.css">
 </head>
-
 <body>
     <div class="header-nav">
         <div class="navbar">
@@ -156,10 +150,8 @@ $active_records_result = $conn->query($active_records_query);
                 <input type="hidden" name="form_type" value="return_book">
                 <input type="hidden" name="record_id" id="promptRecordId">
                 <input type="hidden" name="book_id" id="promptBookId">
-                
                 <label for="returnDateInput">Return Date:</label>
                 <input type="date" id="returnDateInput" name="return_date" value="<?= date('Y-m-d'); ?>" required> 
-                
                 <div class="prompt-actions">
                     <button type="submit" id="confirmReturn">Confirm Return</button>
                     <button type="button" id="cancelReturn" onclick="closeReturnPrompt()">Cancel</button>
@@ -167,7 +159,6 @@ $active_records_result = $conn->query($active_records_query);
             </form>
         </div>
     </div>
-
     <script>
         function openReturnPrompt(button) {
             const recordId = button.getAttribute('data-record-id');
