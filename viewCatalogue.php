@@ -55,7 +55,7 @@ $books = $conn->query("SELECT id, title, author, publication_year, isbn, status 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Catalog & Management</title>
-    <link rel="stylesheet" href="assets/functions.css">
+    <link rel="stylesheet" href="functions.css">
     <style>
         .main-content { padding: 20px; display: flex; justify-content: center; }
         .container { width: 100%; max-width: 1200px; }
