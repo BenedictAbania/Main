@@ -154,7 +154,7 @@ $books = $conn->query("SELECT id, title, author, publication_year, isbn, status 
                                     <td><?= htmlspecialchars($row['isbn']) ?></td>
                                     <td><span class="<?= $status_class ?>"><?= htmlspecialchars($row['status'] ?? 'Available') ?></span></td>
                                     <td>
-                                        <a href="edit_book.php?id=<?= $row['id'] ?>" class="action-btn edit-btn">✏️ Edit</a>
+                                        <a href="edit-removeBook.php?id=<?= $row['id'] ?>" class="action-btn edit-btn">✏️ Edit</a>
                                         <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to permanently delete \'<?= addslashes($row['title']) ?>\' and ALL its borrowing history?')">
                                             <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
                                             <button type="submit" class="action-btn delete-btn">🗑️ Delete</button>
