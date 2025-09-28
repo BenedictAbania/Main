@@ -22,10 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
             $stmt_delete_book->execute();
             
             if ($stmt_delete_book->affected_rows > 0) {
-                 $message = "<p class='success-msg'>✅ Book ID {$delete_id} and its borrowing records deleted successfully!</p>";
+                 $message = "<p class='success-msg'>Book ID {$delete_id} and its borrowing records deleted successfully!</p>";
                  $success = true;
             } else {
-                 $message = "<p class='error-msg'>❌ Book ID {$delete_id} was not found, but related records were cleaned up.</p>";
+                 $message = "<p class='error-msg'>Book ID {$delete_id} was not found, but related records were cleaned up.</p>";
                  $success = true; 
             }
             $stmt_delete_book->close();
@@ -38,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
             
         } catch (mysqli_sql_exception $e) {
             $conn->rollback();
-            $message = "<p class='error-msg'>❌ Fatal Error deleting book: " . htmlspecialchars($e->getMessage()) . "</p>";
+            $message = "<p class='error-msg'>Fatal Error deleting book: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
 
     } else {
-        $message = "<p class='error-msg'>❌ Invalid book ID for deletion.</p>";
+        $message = "<p class='error-msg'>Invalid book ID for deletion.</p>";
     }
 }
 
