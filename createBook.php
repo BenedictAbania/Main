@@ -1,8 +1,6 @@
 <?php
 include "database.php";
-
 $message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $conn->real_escape_string($_POST['title']);
     $author = $conn->real_escape_string($_POST['author']);
@@ -11,14 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $check_query = "SELECT id FROM books WHERE isbn = '$isbn'";
     $check_result = $conn->query($check_query);
-
     if ($check_result && $check_result->num_rows > 0) {
         $message = "<p style='color:red;'> Error: ISBN already exists!</p>";
     } else {
         $current_year = date("Y");
         $min_year = 1450; 
         $max_year = $current_year + 5; 
-
         if (!filter_var($year, FILTER_VALIDATE_INT) || $year < $min_year || $year > $max_year) {
             $message = "<p style='color:red;'> Error: Invalid Publication Year. Please enter a valid four-digit year between {$min_year} and {$max_year}.</p>";
         } else {
