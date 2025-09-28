@@ -64,7 +64,7 @@ $active_records_result = $conn->query($active_records_query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Book</title>
-    <link rel="stylesheet" href="assets/functions.css">
+    <link rel="stylesheet" href="functions.css">
 </head>
 
 <body>
