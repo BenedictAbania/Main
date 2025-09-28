@@ -1,8 +1,6 @@
 <?php
 include "database.php";
-
 $filter_user_id = isset($_GET['user_id']) ? $conn->real_escape_string($_GET['user_id']) : '';
-
 $query = "
     SELECT 
         br.id as record_id,
@@ -21,15 +19,11 @@ $query = "
     WHERE 
         1=1 /* Start of dynamic WHERE clause, no initial restriction */
 ";
-
 if (!empty($filter_user_id)) {
     $query .= " AND br.user_id = '$filter_user_id'";
 }
-
 $query .= " ORDER BY br.borrow_date ASC";
-
 $borrowed_records = $conn->query($query);
-
 $users_result = $conn->query("SELECT borrower_id, name FROM borrower ORDER BY name ASC");
 ?>
 <!DOCTYPE html>
