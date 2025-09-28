@@ -36,19 +36,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $book){
         $max_year = date("Y") + 5; 
 
         if ($year < $min_year || $year > $max_year) {
-            $message = "<p style='color:red;'>❌ Error: Invalid Publication Year. Must be between {$min_year} and {$max_year}.</p>";
+            $message = "<p style='color:red;'> Error: Invalid Publication Year. Must be between {$min_year} and {$max_year}.</p>";
         } elseif (empty($title) || empty($author) || empty($isbn)) {
-             $message = "<p style='color:red;'>❌ Error: All text fields are required.</p>";
+             $message = "<p style='color:red;'> Error: All text fields are required.</p>";
         } else {
             $stmt_update = $conn->prepare("UPDATE books SET title=?, author=?, publication_year=?, isbn=?, status=? WHERE id=?");
             $stmt_update->bind_param("ssissi", $title, $author, $year, $isbn, $status, $id);
             
             if ($stmt_update->execute()) {
-                $message = "<p style='color:green;'>✅ Book updated successfully!</p>";
+                $message = "<p style='color:green;'> Book updated successfully!</p>";
                 $book['title'] = $title; $book['author'] = $author; $book['publication_year'] = $year;
                 $book['isbn'] = $isbn; $book['status'] = $status;
             } else {
-                $message = "<p style='color:red;'>❌ Error updating book: " . htmlspecialchars($conn->error) . "</p>";
+                $message = "<p style='color:red;'> Error updating book: " . htmlspecialchars($conn->error) . "</p>";
             }
             $stmt_update->close();
         }
@@ -111,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $book){
            <option value="Borrowed" <?= $book['status'] == 'Borrowed' ? 'selected' : '' ?>>Borrowed</option>
         </select>
 
-        <button type="submit" class="btn btn-save">💾 Save Changes</button>
+        <button type="submit" class="btn btn-save"> Save Changes</button>
     </form>
     
     <a href="viewCatalogue.php" class="back-link">← Back to Book Catalog</a>
