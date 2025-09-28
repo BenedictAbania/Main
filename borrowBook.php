@@ -1,7 +1,6 @@
 <?php
 include "database.php"; 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book_id']) && isset($_POST['borrower_id'])) {
-    
     $book_id = $conn->real_escape_string($_POST['book_id']);
     $borrower_id = $conn->real_escape_string($_POST['borrower_id']);
 
@@ -30,21 +29,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book_id']) && isset($_
                 if (!$conn->query($insert_record_query)) {
                     $success = false;
                 }
-
                 if ($success) {
                     $conn->commit();
-                    $message = "<p style='color:green;'>✅ Book '<b>" . htmlspecialchars($book_data['title']) . "</b>' checked out successfully to Borrower ID: <b>$borrower_id</b>.</p>";
+                    $message = "<p style='color:green;'> Book '<b>" . htmlspecialchars($book_data['title']) . "</b>' checked out successfully to Borrower ID: <b>$borrower_id</b>.</p>";
                 } else {
                     $conn->rollback();
-                    $message = "<p style='color:red;'>❌ Error recording borrow. Database failed to update. Please try again.</p>";
+                    $message = "<p style='color:red;'> Error recording borrow. Database failed to update. Please try again.</p>";
                 }
-
             } else {
-                   $message = "<p style='color:red;'>❌ Error: Book '<b>" . htmlspecialchars($book_data['title']) . "</b>' is already marked as '{$book_data['status']}'.</p>";
+                   $message = "<p style='color:red;'> Error: Book '<b>" . htmlspecialchars($book_data['title']) . "</b>' is already marked as '{$book_data['status']}'.</p>";
             }
 
         } else {
-            $message = "<p style='color:red;'>❌ Error: Book ID not found in the catalog.</p>";
+            $message = "<p style='color:red;'> Error: Book ID not found in the catalog.</p>";
         }
     }
 }
@@ -53,7 +50,6 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,7 +83,6 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
             </a>
         </div>
     </div>
-
     <div class="main-content">
         <div class="container">
             <?php if (!empty($message)): ?>
@@ -127,7 +122,6 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
                                                             class="borrower-input" 
                                                             placeholder="Borrower ID" 
                                                             required>
-                                            
                                             <button type="submit" class="action-btn">
                                                 Checkout
                                             </button>
@@ -156,12 +150,10 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
             }
             return true;
         }
-
         function filterTable() {
             let input, filter, table, tr, i, txtValue;
             input = document.getElementById("searchInput");
             filter = input.value.toUpperCase();
-            
             table = document.getElementById("bookTable");
             tr = table.getElementsByTagName("tr");
             for (i = 1; i < tr.length; i++) {
@@ -173,7 +165,6 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
                         break;
                     }
                 }
-                
                 if (rowMatch) {
                     tr[i].style.display = "";
                 } else {
