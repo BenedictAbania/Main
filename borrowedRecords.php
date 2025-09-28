@@ -32,7 +32,7 @@ $users_result = $conn->query("SELECT borrower_id, name FROM borrower ORDER BY na
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrowed Book History & Tracking</title>
-    <link rel="stylesheet" href="assets/functions.css"> 
+    <link rel="stylesheet" href="functions.css"> 
     <style>
         .badge-returned {
             background-color: #10b981;
