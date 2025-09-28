@@ -54,7 +54,7 @@ $books = $conn->query("SELECT * FROM books WHERE status = 'Available' OR status 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow Book</title>
-    <link rel="stylesheet" href="assets/functions.css">
+    <link rel="stylesheet" href="functions.css">
 </head>
 
 <body>
