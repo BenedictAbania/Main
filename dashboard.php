@@ -13,7 +13,7 @@ include 'database.php';
     <div class="header-nav">
         <div class="navbar">
             <a href="login.php?logout=true">
-                <span class="btn-icon">⬅️</span> Logout
+                <span class="btn-icon"></span> Logout
             </a>
         </div>
     </div>
